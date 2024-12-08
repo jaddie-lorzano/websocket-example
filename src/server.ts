@@ -19,9 +19,6 @@ wss.on("connection", (ws: WebSocket) => {
                 client.send(`Broadcast: ${message}`);
             }
         });
-
-        // Echo the message back to the client
-        ws.send(`Server: ${message}`);
     });
 
     // Handle client disconnect
