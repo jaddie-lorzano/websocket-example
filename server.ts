@@ -13,6 +13,13 @@ wss.on("connection", (ws: WebSocket) => {
     ws.on("message", (message: string) => {
         console.log(`Received: ${message}`);
 
+        // Broadcast to all clients
+        wss.clients.forEach((client) => {
+            if (client.readyState === WebSocket.OPEN) {
+                client.send(`Broadcast: ${message}`);
+            }
+        });
+
         // Echo the message back to the client
         ws.send(`Server: ${message}`);
     });
